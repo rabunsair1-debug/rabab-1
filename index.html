@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Rabab ❤️</title>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<style>
+body{margin:0;background:black;overflow:hidden;}
+canvas{display:block;}
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+<source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
+</audio>
+
+<canvas id="canvas"></canvas>
+
+<script>
+var canvas=document.getElementById("canvas");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+var stage=new createjs.Stage(canvas);
+var w=canvas.width,h=canvas.height;
+
+var t1=new createjs.Text("Happy Birthday Rabab","bold 54px Arial","#ffffff");
+t1.textAlign="center"; t1.x=w/2; t1.y=h/2-40;
+t1.shadow=new createjs.Shadow("#ff4da6",0,0,40);
+stage.addChild(t1);
+
+var t2=new createjs.Text("The prettiest girl that I've ever seen ❤️","bold 28px Arial","#ff99cc");
+t2.textAlign="center"; t2.x=w/2; t2.y=h/2+20;
+t2.shadow=new createjs.Shadow("#ff4da6",0,0,30);
+stage.addChild(t2);
+
+var colors=["#ff4d6d","#ff85a2","#ff99c8","#ff4da6","#ff6699","#ff3366"];
+
+function heart(){
+ let hrt=new createjs.Shape(),g=hrt.graphics;
+ let c=colors[Math.floor(Math.random()*colors.length)];
+ g.beginFill(c);
+ g.moveTo(0,0)
+ .bezierCurveTo(0,-12,-18,-12,-18,0)
+ .bezierCurveTo(-18,12,0,22,0,30)
+ .bezierCurveTo(0,22,18,12,18,0)
+ .bezierCurveTo(18,-12,0,-12,0,0);
+
+ hrt.x=Math.random()*w;
+ hrt.y=h+40;
+ let s=Math.random()*1+0.4;
+ hrt.scaleX=hrt.scaleY=s;
+ stage.addChild(hrt);
+
+ createjs.Tween.get(hrt)
+ .to({y:-60,alpha:0},4000+Math.random()*2000)
+ .call(()=>stage.removeChild(hrt));
+}
+
+createjs.Ticker.framerate=60;
+createjs.Ticker.addEventListener("tick",()=>{
+ if(Math.random()<0.9) heart();
+ stage.update();
+});
+
+window.addEventListener("resize",()=>{
+ canvas.width=window.innerWidth;
+ canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>
