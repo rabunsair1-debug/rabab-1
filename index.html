@@ -55,6 +55,7 @@ function heart(){
  hrt.scaleX=hrt.scaleY=s;
  stage.addChild(hrt);
 
+ 
  createjs.Tween.get(hrt)
  .to({y:-60,alpha:0},4000+Math.random()*2000)
  .call(()=>stage.removeChild(hrt));
